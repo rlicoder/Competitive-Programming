@@ -11,6 +11,22 @@ int main()
     {
         cin >> a[i];
     }
-    for (int i = 0
-            )
+    int ans = INT_MAX;
+    for (int i = 0; i < (1<<(n-1)); i++)
+    {
+        int in, out;
+        in = out = 0;
+        for (int j = 0; j < n; j++)
+        {
+            in |= a[j];
+            if (i&1<<j)
+            {
+                out ^= in;
+                in = 0;
+            }
+        }
+        out ^= in;
+        ans = min(ans, out);
+    }
+    cout << ans << endl;
 }
