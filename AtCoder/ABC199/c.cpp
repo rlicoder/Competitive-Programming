@@ -19,16 +19,17 @@ int main()
         {
             case 1:
                 {
+                    y--;z--;
+                    //0 1 2 3 4 5 6 7
+                    //0 1 2 3 4 5 6 7
                     if (count % 2 == 1)
                     {
-                        string a = str;
-                        str = "";
-                        str += a.substr(n, n);
-                        str += a.substr(0, n);
+                        swap(str[(y>=n ? y-n : y+n)], str[(z>=n ? z-n : z+n)]);
                     }
-                    y--;z--;
-                    swap(str[y],str[z]);
-                    count = 0;
+                    else
+                    {
+                        swap(str[y],str[z]);
+                    }
                     break;
                 }
             case 2:
