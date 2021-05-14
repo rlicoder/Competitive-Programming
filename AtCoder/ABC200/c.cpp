@@ -4,41 +4,19 @@ using namespace std;
 
 int main()
 {
-    int n;
+    long long n;
     cin >> n;
-    vector<int> a(n);
-    map<int,int> f;
-    for (int i = 0; i < n; i++)
+    vector<long long> a(n);
+    map<long long,long long> f;
+    for (long long i = 0; i < n; i++)
     {
         cin >> a[i];
-        f[a[i]]++;
+        f[a[i] % 200]++;
     }
-    vector<int> b = a;
-    sort(b.begin(), b.end());
-    set<int> s (a.begin(), a.end());
-    int ans = 0;
-    for (auto it : s)
+    long long ans = 0;
+    for (auto it : f)
     {
-        //cout << "i is: " << it << endl;
-        for (int j = 0; j <= ceil(it/200); j++)
-        {
-            //cout << "looking for: " << abs((j*200)-it) << endl;
-            int x = -1 * (j*200 - it);
-            if (binary_search(b.begin(), b.end(), x))
-            {
-                //cerr << it << " " << abs((j*200)-it) << endl;
-                if (it == x)
-                {
-                    ans += max(f[it], f[x]) / 2;
-                    //cerr << max(f[it], f[abs((j*200)-it)]) / 2 << endl;
-                }
-                else
-                {
-                    ans += max(f[it], f[x]);
-                    //cerr << max(f[it], f[abs((j*200)-it)]) << endl;
-                }
-            }
-        }
+        ans += ((it.second * (it.second - 1) / 2));
     }
     cout << ans << endl;
 }
