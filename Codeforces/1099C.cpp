@@ -5,71 +5,86 @@ using namespace std;
 int main()
 {
     string str;
-    cin >> str;
     int k;
-    cin >> k;
-
-    int size = str.size();
-    int q, s;
-    q = s = 0;
+    cin >> str >> k;
+    int cur = str.length();
+    int s, c;
+    s = c = 0;
     for (int i = 0; i < str.size(); i++)
     {
-        if (str[i] == '?')
+        if (str[i] == '*')
         {
-            q++;
-        }
-        else if (str[i] == '*')
-        {
+            cur--;
             s++;
         }
+        else if (str[i] == '?')
+        {
+            cur--;
+            c++;
+        }
     }
-    size -= 2*q;
-    size -= 2*s;
     string ans = "";
-    cerr << str.size() << " " << q << " " << s << endl;
-    if (size < k && s != 0)
+    if (cur == k)
     {
-        cerr << "using snowflake" << endl;
-        //you can use snowflake to increase until valid
         for (int i = 0; i < str.size(); i++)
         {
-            if (str[i] == '*')
-            {
-                for (int j = 0; j < need; j++)
-                {
-                    ans.push_back(str[i-1]);
-                }
-            }
-            else if (str[i] == '?')
-            {
-                ans.pop_back();
-            }
-            else
+            if (str[i] != '*' && str[i] != '?')
             {
                 ans += str[i];
             }
         }
     }
-    else if (k == size)
+    else if (cur > k)
     {
-        cerr << "no change needed" << endl;
-        //no change needed
-        for (int i = 0; i < str.size(); i++)
+        if (cur - (c+s) <= k)
         {
-            if (str[i] != '*' && str[i] != '?')
+            int toremove = cur - k;
+            for (int i = 0; i < str.size(); i++)
             {
-                ans.push_back(str[i]);
+                if (toremove > 0)
+                {
+                    if (str[i] == '?' || str[i] == '*')
+                    {
+                        toremove--;
+                        ans.pop_back();
+                    }
+                }
+                if (str[i] != '?' && str[i] != '*')
+                {
+                    ans += str[i];
+                }
             }
         }
+        else
+        {
+            ans = "Impossible";
+        }
     }
-    else if (k < size)
+    else 
     {
-
-    }
-    else
-    {
-        cout << "Impossible";
-        exit(0);
+        if (s > 0)
+        {
+            int toadd = k - cur;
+            for (int i = 0; i < str.size(); i++)
+            {
+                if (str[i] == '*' && toadd > 0)
+                {
+                    while (toadd > 0)
+                    {
+                        ans.push_back(ans.back());
+                        toadd--;
+                    }
+                }
+                if (str[i] != '?' && str[i] != '*')
+                {
+                    ans.push_back(str[i]);
+                }
+            }
+        }
+        else
+        {
+            cout << "Impossible";
+        }
     }
     cout << ans << endl;
 }
