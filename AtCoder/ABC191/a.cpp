@@ -4,16 +4,17 @@ using namespace std;
 
 int main()
 {
-    int n;
-    cin >> n;
-    if (n == 0)
+    int v,t,s,d;
+    cin >> v >> t >> s >> d;
+    int a,b;
+    a = v*t;
+    b = v*s;
+    if (d >= a && d <= b)
     {
-        n = 200;
+        cout << "No";
     }
-    if (n > 100)
+    else
     {
-        string str = to_string(n);
-        n = stoi(str.substr(str.size()-2, 2));
+        cout << "Yes";
     }
-    cout << 100 - n;
 }

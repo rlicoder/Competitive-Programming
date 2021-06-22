@@ -28,22 +28,37 @@ int main()
         }
         a.push_back({c,count});
         int ans = 2e9;
+        //for (auto it : a)
+        //{
+        //    cout << it.first << "," << it.second << "  ";
+        //}
+        //cout << endl;
         if (a.size() < 3)
         {
             cout << 0 << endl;
         }
         else
         {
-            for (int i = 0; i < a.size()-3; i++)
+            for (int i = 0; i <= a.size()-3; i++)
             {
                 int sum = 0;
                 for (int j = i; j < i+3; j++)
                 {
-                    sum += a[j].second;
+                    sum += a[j].first - '0';
                 }
-                ans = min(ans, sum);
+                if (sum == 1+2+3)
+                {
+                    ans = min (ans, a[i+1].second + 2);
+                }
+            }
+            if (ans == 2e9)
+            {
+                cout << 0 << endl;
+            }
+            else
+            {
+                cout << ans << endl;
             }
         }
-        cout << ans << endl;
     }
 }

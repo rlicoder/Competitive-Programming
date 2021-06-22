@@ -4,26 +4,30 @@ using namespace std;
 
 int main()
 {
-    string str;
-    cin >> str;
-    bool found = true;
-    for (int i = 0; i < str.size(); i+=2)
+    int n,x;
+    cin >> n >> x;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++)
     {
-        if (str[i] >= 'a' && str[i] <= 'z')
+        cin >> a[i];
+    }
+    int count = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] == x)
+        {
+            a[i] = 0;
+        }
+    }
+    for (int i = 0; i < a.size(); i++)
+    {
+        if (a[i] == 0)
         {
 
         }
         else
         {
-            found = false;
+            cout << a[i] << " ";
         }
     }
-    for (int i = 1; i < str.size(); i+=2)
-    {
-        if (str[i] >= 'a' && str[i] <= 'z')
-        {
-            found = false;
-        }
-    }
-    cout << (found ? "Yes" : "No");
 }
