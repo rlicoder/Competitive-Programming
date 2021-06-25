@@ -15,66 +15,26 @@ int main()
         {
             cin >> c[i];
         }
-        stack<array<long long, 5>> q;
-        q.push({0,0,0,0,0});
-        long long ans = n*c[0] + n*c[1];
-        while (!q.empty())
+        long long ans = 2e18;
+        vector<long long> lo(n, 2e18);
+        vector<long long> num(n, n);
+        long long sum = 0;
+        for (int i = 0; i < n; i++)
         {
-            long long x = q.top()[0];
-            long long y = q.top()[1];
-            long long cost = q.top()[2];
-            long long dir = q.top()[3];
-            long long cur = q.top()[4];
-            //cout << "x: " << x << endl;
-            //cout << "y: " << y << endl;
-            //cout << "cost: " << cost << endl;
-            //cout << "dir: " << dir << endl;
-            //cout << "cur: " << cur << endl;
-            //cout << endl;
-            q.pop();
-            if (x == n && y == n)
+            lo[i%2] = min(lo[i%2], c[i]);
+            num[i%2]--;
+            sum += c[i];
+            if (i > 0)
             {
-                ans = min(ans, cost);
+                long long cur = sum + num[0] * lo[0] + num[1] * lo[1];
+                ans = min(ans, cur);
             }
-            else if (dir == 1)
-            {
-                if (cur == n-1 && n-x > 0 && n-y > 0)
-                    continue;
-                for (long long i = n-y; i > 0; i--)
-                {
-                    if (cost + i*c[cur] > ans)
-                    {
-                        continue;
-                    }
-                    q.push({x,y+i,cost+(i*c[cur]), 2, cur+1});
-                }
-            }
-            else if (dir == 2)
-            {
-                if (cur == n-1 && n-x > 0 && n-y > 0)
-                    continue;
-                for (long long i = n-x; i > 0; i--)
-                {
-                    if (cost + i*c[cur] > ans)
-                    {
-                        continue;
-                    }
-                    q.push({x+i,y,cost+(i*c[cur]), 1, cur+1});
-                }
-            }
-            else
-            {
-                for (long long i = 1; i <= n; i++)
-                {
-                    q.push({x+i, y, i*c[cur], 1, cur+1});
-                }
-                for (long long i = 1;i <= n; i++)
-                {
-                    q.push({x, y+i, i*c[cur], 2, cur+1});;
-                }
-            }
+
         }
         cout << ans << endl;
     }
-
 }
+
+
+
+
