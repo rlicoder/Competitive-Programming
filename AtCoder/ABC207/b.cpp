@@ -6,36 +6,23 @@ int main()
 {
     long long a,b,c,d;
     cin >> a >> b >> c >> d;
-    if (c > b)
+    long long l = 0;
+    long long r = 1e9;
+    long long ans = -1;
+    while (l <= r)
     {
-        long long l = 1;
-        long long r = 2e18;
-        long long count = 0;
-        long long ans = 0;
-        while (l < r)
+        long long mid = l + (r - l) / 2;
+        long long num = a + mid * b;
+        long long den = mid * c;
+        if (den * d >= num)
         {
-            long long mid = (l + r) / 2;
-            long long num = a + mid * b;
-            long long den = mid * c;
-            if (den * d >= num)
-            {
-                r = mid;
-                ans = mid;
-            }
-            else
-            {
-                l = mid;
-            }
-            count++;
-            if (count == 100)
-            {
-                break;
-            }
+            r = mid - 1;
+            ans = mid;
         }
-        cout << ans << endl;
+        else
+        {
+            l = mid + 1;
+        }
     }
-    else
-    {
-        cout << -1 << endl;
-    }
+    cout << ans << endl;
 }
