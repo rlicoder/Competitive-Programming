@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const long long MAXN = 2e5;
+const long long MAXN = 2e9+1;
 
 vector<long long> ft(MAXN, 0);
 
