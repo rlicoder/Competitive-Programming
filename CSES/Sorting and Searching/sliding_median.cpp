@@ -2,16 +2,15 @@
 
 using namespace std;
 
-const long long MAXN = 2e9+1;
-
-vector<long long> ft(MAXN, 0);
+vector<int> ft(2e7, 0);
 
 void add(long long i, long long cnt)
 {
-    while (i < MAXN)
+    while (i < ft.size())
     {
         ft[i] += cnt;
         i += i&(-i);
+        cout << i << endl;
     }
 };
 
@@ -33,23 +32,21 @@ long long rsq(long long a, long long b)
 
 long long findbyk(long long i)
 {
-    long long l = 1;
-    long long r = MAXN;
-    long long ans = 0;
-    while (l <= r)
+    long long l = 0;
+    long long r = ft.size();
+    while (l < r)
     {
         long long mid = l + (r-l) / 2;
         if (rsq(mid) >= i)
         {
-            ans = mid;
-            r = mid - 1;
+            r = mid;
         }
         else
         {
             l = mid + 1;
         }
     }
-    return ans;
+    return l;
 };
 
 
@@ -57,6 +54,7 @@ int main()
 {
     long long n, k;
     cin >> n >> k;
+    ft.resize(n);
     vector<long long> a(n);
     for (long long i = 0; i < n; i++)
     {
