@@ -1,9 +1,15 @@
+#pragma GCC target ("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
+#pragma GCC optimize ("-ffloat-store")
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize ("unroll-loops")
 #include <bits/stdc++.h>
 
 using namespace std;
 
 int main()
 {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
     int n;
     cin >> n;
     vector<bitset<3000>> a(n);
@@ -24,6 +30,5 @@ int main()
         }
     }
     cout << ans << endl;
-    cout << "time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << endl;
 }
 
