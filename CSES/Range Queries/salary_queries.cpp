@@ -47,15 +47,23 @@ int main()
     cin >> n >> q;
     vector<int> a(n);
     map<int,int> m;
+    map<int,int> norm2comp;
+    map<int,int> comp2norm;
+    set<int> s;
+    int j = 0;
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
         m[a[i]]++;
     }
+    for (auto it : m)
+    {
+        norm2comp[it.first] = j++;
+    }
     Vertex st(0, 1e9);
     for (auto it : m)
     {
-        st.add(it.first, it.second);
+        st.add(norm2comp[it.first], it.second);
     }
     for (int i = 0; i < q; i++)
     {
@@ -65,6 +73,8 @@ int main()
         {
             int x,y;
             cin >> x >> y;
+            x = norm2comp.lower_bound(x)->second;
+            y = norm2comp.lower_bound(y)->second;
             cout << st.get_sum(x, y+1) << endl;
         }
         else
@@ -72,11 +82,10 @@ int main()
             int x,y;
             cin >> x >> y;
             int old = a[x-1];
-            m[old]--;
-            st.add(old, -1);
-            m[y]++;
-            st.add(y, 1);
+            //m[old]--;
+            st.add(norm2comp[old], -1);
+            //m[y]++;
+            st.add(norm2comp[y], 1);
         }
     }
-
 }

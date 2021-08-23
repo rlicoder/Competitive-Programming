@@ -5,7 +5,7 @@ using namespace std;
 const long long inf = 0;
 struct Node {
 	Node *l = 0, *r = 0;
-	long long lo, hi, mset = inf, madd = 0, val = -inf;
+	long long lo, hi, mset = inf, madd = 0, val = 0;
 	Node(long long lo,long long hi):lo(lo),hi(hi){} // Large long longerval of -inf
     long long f (long long a, long long b) { return a+b; }
 	Node(vector<long long>& v, long long lo, long long hi) : lo(lo), hi(hi) {
@@ -82,12 +82,7 @@ int main()
         else
         {
             cin >> a >> b;
-            cout << tr->query(a-1,b) << endl;
+            cout << tr->query(a-1,b) << " ";
         }
-        for (int i = 0; i < n; i++)
-        {
-            cout << tr->query(i, i+1) << " ";
-        }
-        cout << endl;
     }
 }
