@@ -6,7 +6,7 @@ int main()
 {
     int tc;
     cin >> tc;
-    while (tc--)
+    while(tc--)
     {
         int n;
         cin >> n;
@@ -17,11 +17,9 @@ int main()
         }
         int hi = max_element(a.begin(), a.end()) - a.begin();
         int lo = min_element(a.begin(), a.end()) - a.begin();
-        int ans = min({/*remove from left only*/ max(hi, lo) + 1,
-                       /*remove hi from left, lo from right*/ hi + 1 + (n - lo),
-                       /*remove hi from right, lo from left*/ lo + 1 + (n - hi),
-                       /*remove both from the lright*/ n - min(lo,hi)
-                });
+        hi++;lo++;
+        int ans = min({lo + hi, (n-lo) + (n-hi) - 2, lo + (n-hi) - 1, hi + (n-lo) - 1});
+
         cout << ans << endl;
     }
 }
